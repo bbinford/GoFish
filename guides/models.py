@@ -14,7 +14,7 @@ class WaterTypes(models.Model):
 
 
 class ServiceLocation(models.Model):
-    water_type = class models.ManyToManyField(WaterTypes)
+    water_type = models.ManyToManyField(WaterTypes)
     location = models.CharField(max_length=150)
 
     class Meta:
