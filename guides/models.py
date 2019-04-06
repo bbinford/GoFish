@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.db import models
 from django.conf import settings
 
@@ -94,6 +96,30 @@ class Policy(models.Model):
         return self.policy_title
 
 
+class Trip(models.Model):
+    PRIVATE = 'pr'
+    SHARED = 'sr'
+    CHARTER_TYPE = (
+        (PRIVATE, 'Private Trip'),
+        (SHARED, 'Shared Trip')
+    )
+    name = models.CharField(max_length=50)
+    cost = models.IntegerField()
+    each_additional_person = models.IntegerField()
+    min_capacity = models.IntegerField()
+    description = models.TextField(max_length=350)
+    start_time = models.TimeField()
+    duration = models.DurationField()
+    type = models.CharField(
+        max_length=2,
+        choices=CHARTER_TYPE,
+        default=PRIVATE,
+    )
+
+    def __str__(self):
+        return self.name
+
+
 class GuideBusiness(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -109,6 +135,7 @@ class GuideBusiness(models.Model):
     amenities = models.ManyToManyField(Amenities)
     trip_includes = models.ManyToManyField(TripeInclude)
     policy = models.ManyToManyField(Policy)
+    trip_package = models.ManyToManyField(Trip)
 
     class Meta:
         verbose_name_plural = 'Guide Businesses'
