@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'guides.apps.GuidesConfig',
     # Third Party Apps
+    'djmoney',
     # GoFish Apps
     'authenticate',
 ]

@@ -1,7 +1,7 @@
-from datetime import datetime
-
 from django.db import models
 from django.conf import settings
+
+from djmoney.models.fields import MoneyField
 
 
 class WaterTypes(models.Model):
@@ -104,8 +104,8 @@ class Trip(models.Model):
         (SHARED, 'Shared Trip')
     )
     name = models.CharField(max_length=50)
-    cost = models.IntegerField()
-    each_additional_person = models.IntegerField()
+    cost = MoneyField(max_digits=4, decimal_places=2, default_currency='USD')
+    each_additional_person = MoneyField(max_digits=4, decimal_places=2, default_currency='USD')
     min_capacity = models.IntegerField()
     description = models.TextField(max_length=350)
     start_time = models.TimeField()
