@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'djmoney',
     # GoFish Apps
     'authenticate',
+    'booking',
 ]
 
 MIDDLEWARE = [
